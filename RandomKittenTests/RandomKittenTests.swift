@@ -19,6 +19,7 @@ class MockAPIHelper: FactAPIHelper {
 class RandomKittenTests: XCTestCase {
     var mockAPIHelper: MockAPIHelper!
 
+    // Injects Mock API Helper instead of calling real API
     override func setUpWithError() throws {
         mockAPIHelper = MockAPIHelper()
     }
@@ -26,7 +27,8 @@ class RandomKittenTests: XCTestCase {
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-    
+
+    // Tests if the API to get the fact was called
     func testFactAPI() throws {
         let catPosterVC = CatPosterViewController()
         catPosterVC.posterVM = CatPosterViewModel(apiHelper: mockAPIHelper)
@@ -34,6 +36,7 @@ class RandomKittenTests: XCTestCase {
         XCTAssertEqual(mockAPIHelper.factAPICalled, 1)
     }
 
+    // Tests if tapping the view calls the API to get the fact
     func testTap() throws {
         let catPosterVC = CatPosterViewController()
         catPosterVC.posterVM = CatPosterViewModel(apiHelper: mockAPIHelper)
@@ -41,6 +44,7 @@ class RandomKittenTests: XCTestCase {
         XCTAssertEqual(mockAPIHelper.factAPICalled, 1)
     }
 
+    // Tests if a random cat picture URL is generated
     func testGetPoster() throws {
         let catPosterVC = CatPosterViewController()
         catPosterVC.posterVM = CatPosterViewModel(apiHelper: mockAPIHelper)

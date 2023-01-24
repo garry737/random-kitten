@@ -15,10 +15,12 @@ extension UIImageView {
             return
         }
         
-        DispatchQueue.main.async { [weak self] in
+        DispatchQueue.global(qos: .background).async {
             if let imageData = try? Data(contentsOf: url) {
                 if let loadedImage = UIImage(data: imageData) {
-                        self?.image = loadedImage
+                    DispatchQueue.main.async {
+                        self.image = loadedImage
+                    }
                 }
             }
         }
